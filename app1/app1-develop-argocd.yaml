@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app1-dev
+  namespace: argocd
+  annotations:
+    notifications.argoproj.io/subscribe.on-sync-status-unknown.telegram: letrung9100
+    notifications.argoproj.io/subscribe.on-sync-succeeded.telegram: letrung9100
+spec:
+  destination:
+    name: in-cluster
+    namespace: dev
+  project: workshop
+  source:
+    path: app1/overlay/develop
+    repoURL: https://scm.devops.vnpt.vn/erp.ptpm1.onebss/OneAPI/infra.git
+    targetRevision: master
+  syncPolicy:
+    automated:
+      selfHeal: true
+    # kustomize:
+    #   version: v2.3.0

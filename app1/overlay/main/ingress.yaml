@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app1-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/enable-access-log: "true"
+    # nginx.ingress.kubernetes.io/limit-connections: "10000"
+    # nginx.ingress.kubernetes.io/limit-rps: "500"
+    # nginx.ingress.kubernetes.io/enable-cors: "false"
+    # nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    # nginx.ingress.kubernetes.io/server-snippet: |-
+    #   location ~* .(actuator) {
+    #     deny all;
+    #     return 403;
+    #   }
+spec:
+  tls:
+  - hosts:
+    - abc.com
+    secretName: abc-com
+  rules:
+  - host: abc.com
+    http:
+      paths:
+      - path: /app1
+        pathType: Prefix
+        app1:
+          service:
+            name: app1
+            port:
+              number: 80
+
+
+
