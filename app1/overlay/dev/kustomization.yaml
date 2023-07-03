@@ -14,4 +14,4 @@ resources:
 namespace: dev
 images:
 - name: ghcr.io/letrung910/monorepo/app1
-  newTag: dev
+  newTag: 4ebf020
